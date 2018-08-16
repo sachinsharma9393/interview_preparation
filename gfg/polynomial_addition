@@ -1,0 +1,47 @@
+class GFG
+{
+    public static void addPolynomial(Node p1,Node p2)
+    {
+        //Add your code here.
+        TreeMap<Integer,Integer>pc=new TreeMap<>(Collections.reverseOrder());
+        Node ptr=p1;
+        pc.put(p1.pow,p1.coeff);
+        while(ptr.next !=null)
+        {
+            ptr=ptr.next;
+            pc.put(ptr.pow,ptr.coeff);
+        }
+
+        Node q=p2;//for head
+        if(pc.containsKey(q.pow))
+        {
+            int data=pc.get(q.pow);
+            pc.replace(q.pow,data,data+q.coeff);
+        }
+        else pc.put(p2.pow,p2.coeff);
+
+        while(q.next !=null)
+        {
+            q=q.next;
+            if(pc.containsKey(q.pow))
+            {
+            int data=pc.get(q.pow);
+            pc.replace(q.pow,data,data+q.coeff);
+            }
+            else pc.put(q.pow,q.coeff);
+        }
+
+        Set s=pc.keySet();
+        Iterator i=s.iterator();
+        StringBuilder sb=new StringBuilder();
+        while(i.hasNext())
+        {
+            int power=(int)i.next();
+            int coeff=pc.get(power);
+            sb.append(coeff+"x^"+power+" + ");
+        }
+        int n=sb.length;
+        sb.delete(n-3,n);
+        System.out.print(sb);
+    }
+}

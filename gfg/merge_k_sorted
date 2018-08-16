@@ -1,0 +1,29 @@
+class GfG
+{
+    Node mergeKList(Node[]a,int N)
+    {
+     //Add your code here.
+     Vector<Integer>v=new Vector<>();
+     for(int i=0;i<N;i++)
+     {
+         Node temp=a[i];
+         v.add(temp.data);
+         while(temp.next!=null)
+         {
+             temp=temp.next;
+             v.add(temp.data);
+         }
+     }
+     Collections.sort(v);
+     Node head=new Node(v.get(0));
+     Node ptr=head;
+     for(int i=1;i<v.size();i++)
+     {
+
+         ptr.next=new Node(v.get(i));
+         ptr=ptr.next;
+
+     }
+     return head;
+    }
+}

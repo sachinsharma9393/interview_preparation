@@ -1,0 +1,40 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+class LCS
+ {
+	public static void main (String[] args) throws IOException
+	 {
+	 //code
+	 BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+	 int t= Integer.parseInt(br.readLine());
+	 int ta[]=new int[t];
+	    for(int i=0;i<t;i++)
+	    {
+	        int s1,s2;
+	        StringTokenizer st=new StringTokenizer(br.readLine()," ");
+	        s1=Integer.parseInt(st.nextToken());s2=Integer.parseInt(st.nextToken());
+	        String a=br.readLine();
+	        String b=br.readLine();
+	        ta[i]=lcs(a,b,s1,s2);
+
+	    }
+	    for(int i=0;i<t;i++)
+	    {
+	        System.out.println(ta[i]);
+	    }
+	 }
+	 public static int lcs(String a,String b,int s1,int s2)
+	 {
+	     int table[][]=new int[s1+1][s2+1];
+	     for(int i=1;i<=s1;i++)
+	     {
+	         for(int j=1;j<=s2;j++)
+	         {
+	             if(a.charAt(i-1)==b.charAt(j-1)) table[i][j]=1+table[i-1][j-1];
+	             else table[i][j]=Math.max(table[i-1][j],table[i][j-1]);
+	         }
+	     }
+	     return table[s1][s2];
+	 }
+}

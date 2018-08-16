@@ -1,0 +1,31 @@
+Node reorderlist(Node head)
+    {
+        // Your code here
+        Node p=head;
+        Vector<Integer>v=new Vector<>();
+        v.add(p.data);
+        while(p.next!=null)
+        {
+            p=p.next;
+            v.add(p.data);
+        }
+        int m=0,q=v.size()-1;
+        int a[]=new int[v.size()];
+        int i=0;
+        while(m<=q )
+        {
+            a[i++]=v.get(m);
+            if(i==v.size())break;
+            a[i++]=v.get(q);
+            m++;q--;
+        }
+       // a[i]=v.get(m);
+        Node head1=new Node(a[0]);
+        Node e=head1;
+        for(int j=1;j<a.length;j++)
+        {
+            Node t=new Node(a[j]);
+            e.next=t;
+            e=e.next;
+        }
+        return head1;

@@ -1,0 +1,74 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+class GFG
+ {
+	public static void main (String[] args) throws IOException
+	 {
+	 //code
+	BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+	int n=Integer.parseInt(br.readLine());
+	 String  a[]=new String[n];
+	 for( int i=0;i<n;i++)
+	 {  int c=0;
+	 int x=0;int o=0;
+	 String s=br.readLine().replace(" ","");
+	        for(int j=0;j<9;j++)
+	             {
+	                 if(s.charAt(j)=='X')x++;
+	                 else o++;
+	             }
+	             Boolean b=true;
+	             Boolean owins=false;
+	             if(x-o!=1)b=false;
+	 else
+	 {
+	            if(s.charAt(0)==s.charAt(4)&&s.charAt(0)==s.charAt(8))
+	            {
+	                if(s.charAt(0)=='O')owins=true;
+	            }
+
+	            if(!owins && s.charAt(2)==s.charAt(4)&&s.charAt(2)==s.charAt(6))
+	            {
+	                if(s.charAt(2)=='O')owins=true;
+	            }
+	             if(!owins &&s.charAt(0)==s.charAt(3)&&s.charAt(0)==s.charAt(6))
+	             {
+	                if(s.charAt(0)=='O')owins=true;
+	            }
+	             if(!owins &&s.charAt(1)==s.charAt(4)&&s.charAt(1)==s.charAt(7))
+	             {
+	                if(s.charAt(i)=='1')owins=true;
+	            }
+	             if(!owins &&s.charAt(2)==s.charAt(5)&&s.charAt(2)==s.charAt(8))
+	             {
+	                if(s.charAt(2)=='O')owins=true;
+	            }
+	             if(!owins &&s.charAt(0)==s.charAt(1)&&s.charAt(0)==s.charAt(2))
+	             {
+	                if(s.charAt(0)=='O')owins=true;
+	            }
+	             if(!owins &&s.charAt(3)==s.charAt(4)&&s.charAt(3)==s.charAt(5))
+	             {
+	                if(s.charAt(3)=='O')owins=true;
+	            }
+	             if(!owins &&s.charAt(6)==s.charAt(7)&&s.charAt(6)==s.charAt(8))
+	             {
+	                if(s.charAt(6)=='O')owins=true;
+	            }
+	             if(!owins)b=true;
+	             else b=false;
+
+	 }
+                if(b)a[i]="Valid";
+                else a[i]="Invalid";
+
+
+	 }
+	 for(int i=0;i<n;i++)
+	 {
+	     System.out.println(a[i]);
+	 }
+
+	 }
+}

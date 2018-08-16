@@ -1,0 +1,75 @@
+{
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+class ShortestPath{
+    public static void main (String[] args)
+    {	Scanner sc = new Scanner(System.in);
+		int t = sc.nextInt();
+		while(t-->0){
+			int n = sc.nextInt();
+			int[][] graph = new int[21][21];
+			for(int i = 0; i < n; i++){
+				for(int j = 0; j < n; j++){
+					graph[i][j] = sc.nextInt();
+				}
+			}
+			int src = sc.nextInt();
+			GfG g = new GfG();
+			g.dijkstra(graph, src, n);
+			System.out.println();
+		}
+    }
+}
+}
+
+/*Please note that it's Function problem i.e.
+you need to write your solution in the form of Function(s) only.
+Driver Code to call/invoke your function is mentioned above.*/
+
+/*Complete the given function*/
+class GfG
+{  public static void dijkstra(int graph[][], int src ,int V)
+    {//add code here.
+
+    Integer table[]=new Integer[V];
+
+    Arrays.fill(table,Integer.MAX_VALUE);
+    table[src]=0;
+        //Queue<Integer>q=new LinkedList<>();
+        PriorityQueue<Integer>q=new PriorityQueue<>();
+
+        q.offer(src);
+        while(!q.isEmpty())
+        {
+            int from=q.poll();
+            for(int to=0;to<V;to++)
+            {
+
+                    if(graph[from][to]>0)
+                {
+
+                        int d=table[from]+graph[from][to];
+                        if(d<table[to])
+                        {
+                            table[to]=d;
+                            q.offer(to);
+                        }
+
+
+                }
+
+
+
+            }
+
+
+
+        }
+         for(int i=0;i<V;i++)
+            {
+                System.out.print(table[i]+" ");
+            }
+
+}
+}

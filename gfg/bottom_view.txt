@@ -1,0 +1,66 @@
+public void bottomView(Node root)
+    {
+        //add code here.
+        if(root==null)return;
+        else
+        {
+            TreeMap<Integer,Vector<Integer>>map=new TreeMap<>();
+            Queue<Pair>q=new LinkedList<>();
+            q.offer(new Pair(root,0));
+            Vector<Integer> k=new Vector<>();
+            k.add(root.data);
+            map.put(0,k);
+            while(!q.isEmpty())
+            {
+                int loop=q.size();
+                for(int i=0;i<loop;i++)
+                {
+                    Pair p=q.poll();
+                    Node t=p.n;
+                    int dw=p.d;
+                    if(t.left!=null)
+
+                    {
+
+                        q.offer(new Pair(t.left,dw-1));
+                        if(map.containsKey(dw-1))
+                        {
+                            map.get(dw-1).add(t.left.data);
+                        }
+                        else
+                        {
+                            Vector<Integer>v=new Vector<>();
+                            v.add(t.left.data);
+                            map.put(dw-1,v);
+                        }
+                    }
+                    if(t.right!=null)
+                    {
+                        q.offer(new Pair(t.right,dw+1));
+                        if(map.containsKey(dw+1))
+                        {
+                            map.get(dw+1).add(t.right.data);
+                        }
+                        else
+                        {
+                            Vector<Integer>v=new Vector<>();
+                            v.add(t.right.data);
+                            map.put(dw+1,v);
+                        }
+
+                    }
+                }
+
+            }
+            Set s=map.keySet();
+            Iterator it=s.iterator();
+            while(it.hasNext())
+            {
+                int key=(int)it.next();
+                int size=map.get(key).size();
+                System.out.print(map.get(key).get(size-1)+" ");
+            }
+
+        }
+
+    }

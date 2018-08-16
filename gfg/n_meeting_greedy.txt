@@ -1,0 +1,74 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Time
+{
+    int st;
+    int lt;
+    int index;
+}
+class GFG
+ {
+	public static void main (String[] args)
+	 {
+	 //code
+	  Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        String  a[]=new String[n];
+
+        for(int i=0;i<n;i++)
+        {
+            int s=sc.nextInt();
+           Time ti[]=new Time[s];
+
+            for(int j=0;j<s;j++)
+            {
+                ti[j]=new Time();
+                ti[j].st=sc.nextInt();
+                ti[j].index=j+1;
+            }
+            for(int j=0;j<s;j++)
+            {
+                ti[j].lt=sc.nextInt();
+            }
+            Arrays.sort(ti, new Comparator<Time>() {
+           // @Override
+            public int compare(Time o1, Time o2) {
+
+                return Integer.compare(o1.lt,o2.lt);
+            }
+             });
+
+             Stack<Integer>ss=new Stack<>();
+             Stack<Integer>ee=new Stack<>();
+             ss.push(ti[0].st);ee.push(ti[0].lt);
+             String w=""+ti[0].index+" ";
+             for(int j=1;j<s;j++)
+             {
+                 int p=ti[j].st;
+                 int q=ti[j].lt;
+                 int ed=ee.peek();
+                 if(ed<p)
+                 {
+                     ss.push(p);
+                     ee.push(q);
+                     w+=ti[j].index+" ";
+                 }
+             }
+
+
+
+
+
+
+
+            a[i]=w;
+        }
+        for(int i=0;i<n;i++)
+        {
+            System.out.println(a[i]);
+        }
+
+	 }
+}

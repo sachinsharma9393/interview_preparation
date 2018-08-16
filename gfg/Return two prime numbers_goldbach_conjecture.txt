@@ -1,0 +1,60 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+class GFG
+ {
+	public static void main (String[] args)
+	 {
+	 //code
+	 Scanner sc=new Scanner (System.in );
+	 int t=sc.nextInt();
+	 String ta[]=new String [t];
+	 for(int i=0;i<t;i++)
+	 {
+                int n=sc.nextInt();
+                int table[]=new int[n+1];
+                Arrays.fill(table,1);
+                for(int j=2;j<=Math.sqrt(n);j++)
+                {
+                    fill(table,j);
+                }
+                int c=0;
+                for(int j=3;j<=n;j++)
+                {
+                    if(table[j]==1&&(j%2!=0))c++;
+                }
+                int temp[]=new int[c];
+                int index=0;
+                for(int j=3;j<=n;j++)
+                {
+                    if(table[j]==1&&(j%2!=0))temp[index++]=j;
+                }
+                String f="";
+                int l=0;int r=temp.length-1;
+                while(l<r)
+                {
+                    if(temp[l]+temp[r]==n)
+                    {
+                        f+=temp[l]+" "+temp[r];
+                        break;
+                    }
+                    else if(temp[l]+temp[r]>n)r--;
+                    else l++;
+                }
+
+             ta[i]=f;
+	 }
+	 for(int i=0;i<t;i++)
+	 {
+	     System.out.println(ta[i]);
+	 }
+
+	 }
+	 static void fill(int a[],int j)
+	 {
+	     for(int i=j*2;i<a.length;i+=j)
+	     {
+	         a[i]=0;
+	     }
+	 }
+}

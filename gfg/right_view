@@ -1,0 +1,23 @@
+Queue<Node>q=new LinkedList<>();
+
+        if(root==null)return;
+		else
+		{
+			q.offer(root);
+			while(!q.isEmpty())
+			{
+
+				int loop=q.size();
+				for(int i=0;i<loop;i++)
+				{
+					Node temp=q.poll();
+					if(i==loop-1)//printing last value per level so as to view from right side
+					{
+						System.out.println(temp.data);
+					}
+					if(temp.left!=null)q.offer(temp.left);
+					if(temp.right!=null)q.offer(temp.right);
+
+				}
+			}
+		}

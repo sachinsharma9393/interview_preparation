@@ -1,0 +1,83 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+class GFG
+ {
+	public static void main (String[] args) throws IOException
+	 {
+	 //code
+	 BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+	 int t= Integer.parseInt(br.readLine());
+	 String ta[]=new String[t];
+	    for(int i=0;i<t;i++)
+	    {
+	        int l=Integer.parseInt(br.readLine());
+	        String a=br.readLine();
+	        ta[i]=rep(a,l);
+
+	    }
+	    for(int i=0;i<t;i++)
+	    {
+	        System.out.println(ta[i]);
+	    }
+	 }
+	 public static String rep(String s,int l)
+	 {
+	     if(l==1)return -1+"";
+	     int table[][]=new int[l][l];
+	     for(int i=1;i<l;i++)
+	     {
+	         if(s.charAt(0)==s.charAt(i))table[0][i]=1;
+	     }
+	     int max=0;
+	     int index=0;
+	     for(int i=1;i<l-1;i++)
+	     {
+	         for(int j=i+1;j<l;j++)
+	         {
+	             if(s.charAt(i)==s.charAt(j))
+	             table[i][j]=1+table[i-1][j-1];
+	             if(table[i][j]>max)
+	             {
+	                 index=i;
+	                 max=table[i][j];
+	             }
+
+	         }
+	     }
+	     int start=index-max+1;
+        int end=start +max;
+//if same length,it was asked to print first occurence
+        if(max==1)
+        {
+            LinkedHashMap<Character,Integer>v=new LinkedHashMap<>();
+            v.put(s.charAt(0),0);
+            char i_ret=0;
+            for(int i=1;i<s.length();i++)
+            {
+                char ch=s.charAt(i);
+                if(v.containsKey(ch))
+                {
+                    int val=v.get(ch);
+                    v.replace(ch,val,val+1);
+
+                }
+                else v.put(ch,0);
+            }
+            Set sk=v.keySet();
+            Iterator it=sk.iterator();
+            while(it.hasNext())
+            {
+                char k=(char)it.next();
+                if(v.get(k)>0){
+                    i_ret=k;break;
+                }
+            }
+            return i_ret+"";
+        }
+	     else return s.substring(start,end);
+
+
+
+	 }
+}

@@ -1,0 +1,88 @@
+{
+
+import java.util.*;
+import java.lang.*;
+class Pair
+{
+    int x;
+    int y;
+
+    public Pair(int a, int b)
+    {
+        x = a;
+        y = b;
+    }
+}
+class Chainlength
+{
+    public static void main (String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+
+        while(t-- > 0)
+        {
+            int n = sc.nextInt();
+            Pair pr[] = new Pair[n];
+            int arr[] = new int[2*n];
+            for(int i = 0; i < 2*n; i++)
+            {
+               arr[i] = sc.nextInt();
+            }
+            for(int i = 0, j = 0; i < 2*n-1 && j < n; i = i+2, j++)
+            {
+                pr[j] = new Pair(arr[i], arr[i+1]);
+            }
+            GfG g = new GfG();
+            System.out.println(g.maxChainLength(pr, n));
+        }
+    }
+}
+
+}
+
+/*Please note that it's Function problem i.e.
+you need to write your solution in the form of Function(s) only.
+Driver Code to call/invoke your function is mentioned above.*/
+
+
+class GfG
+{
+    int maxChainLength(Pair a[], int n)
+    {
+        //your code here
+
+        Stack<Integer>s=new Stack<>();
+        Stack<Integer>e=new Stack<>();
+
+        Arrays.sort(a,new Comparator<Pair>()
+        {
+           public int compare(Pair p1,Pair p2)
+           {
+               return Integer.compare(p1.y,p2.y);
+           }
+        });
+        int c=1;
+        s.push(a[0].x);e.push(a[0].y);
+        for(int j=1;j<a.length;j++)
+        {
+             int p=a[j].x;
+                int q=a[j].y;
+                int ee=e.peek();
+                if(ee<p)
+                {
+
+                    e.push(q);
+
+                    s.push(p);
+                    c++;
+
+                }
+                /*else
+                {
+                   int ed= e.pop();
+                    e.push(Math.max(ed,q));
+                }*/
+        }
+        return c;
+    }
+}

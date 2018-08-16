@@ -1,0 +1,58 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+class GFG
+ {
+	public static void main (String[] args)
+	 {
+	 //code
+	 Scanner sc=new Scanner(System.in);
+	 int n=sc.nextInt();
+	 int a[]=new int[n];
+	 PriorityQueue<Integer>ms=new PriorityQueue<>
+	 (Collections.reverseOrder());
+	 PriorityQueue<Integer>ml=new PriorityQueue<>();
+	 for( int i=0;i<n;i++)
+	 {       int x=sc.nextInt();
+	        add(x,ms,ml);
+	        rebalance(ms,ml);
+	        a[i]=getMed(ms,ml);
+
+	 }
+	 for(int i=0;i<n;i++)
+	 {
+	     System.out.println(a[i]);
+	 }
+
+	 }
+	 static void add(int a,PriorityQueue<Integer>ms,PriorityQueue<Integer>ml)
+	 {
+	     if(ms.size()==0 || a < ms.peek())
+	     {
+	         ms.offer(a);
+
+	     }
+	     else ml.offer(a);
+	 }
+	 static void rebalance(PriorityQueue<Integer>ms,PriorityQueue<Integer>ml)
+	 {
+	     PriorityQueue<Integer>bigger=ms.size()>ml.size()?ms:ml;
+	     PriorityQueue<Integer>smaller=ms.size()>ml.size()?ml:ms;
+	     if(bigger.size()-smaller.size()>1)
+	     {
+	         smaller.offer(bigger.poll());
+	     }
+	 }
+	 static int  getMed(PriorityQueue<Integer>ms,PriorityQueue<Integer>ml)
+	 {
+	      PriorityQueue<Integer>bigger=ms.size()>ml.size()?ms:ml;
+	     PriorityQueue<Integer>smaller=ms.size()>ml.size()?ml:ms;
+	     if(bigger.size()==smaller.size())
+	     {
+	         Double d=new Double(((double)bigger.peek()+smaller.peek())/2);
+	       return  d.intValue();
+	     }
+	     return bigger.peek();
+
+	 }
+ }
