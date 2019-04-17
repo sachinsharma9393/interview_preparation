@@ -57,7 +57,7 @@ StringBuilder sb=new StringBuilder();
             System.out.println(w[i]);
         }
 
-        System.out.println("revrse");
+        System.out.println("reverse");
         Integer p[]={30,35,40,80,100};
         Arrays.sort(p,0,2,Collections.reverseOrder());
         System.out.println(p[0]);
